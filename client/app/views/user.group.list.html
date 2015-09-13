@@ -1,0 +1,15 @@
+<div mc-messages></div>
+<div class="row">
+  <div ng-include="'views/templates/sidebar.html'"></div>
+  <div class="col-sm-8 col-md-9">
+    <h3 id="mygroup_list_header">{{'MY_GROUPS_TITLE_TEXT' | translate}}</h3>
+    <div class="pull-right">
+      <button ng-click="move()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> New</button>
+    </div>
+    <div class="row" ng-repeat="group in groups" cg-busy="listPromise">
+      <div class="col-sm-12 col-md-12">
+        <h4 class="group-title"><a href="#/group/{{group.id}}">{{group.name}}</a></h4>
+      </div>
+    </div>
+  </div>
+</div>

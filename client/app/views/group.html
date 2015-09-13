@@ -1,0 +1,23 @@
+<div mc-messages></div>
+<div class="row">
+  <div ng-include="'views/templates/sidebar.html'"></div>
+  <div class="well col-sm-8 col-md-9" cg-busy="getPromise">
+    <div class="form-group">
+      <h3>{{group.name | limitTo: 255}}</h3>
+    </div>
+    <div ng-if="members.length === 0">
+      {{"GROUP_NOMEMBERS_TEXT" | translate}}
+    </div>
+    <div ng-if="members.length >0">
+      <div class="row" ng-repeat="member in members">
+        <div class="col-sm-12 col-md-12">
+          <span class="group-member">{{ member.email }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <input type="text" name="email" ng-trim="true" class="form-control input-sm" placeholder="Enter email" />
+        <button ng-click="addMember()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add Member</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div mc-messages></div>
+<div class="row">
+  <div ng-include="'views/templates/sidebar.html'"></div>
+  <div class="col-xs-12 col-sm-8 col-md-8">
+    <form name="createForm" role="form" ng-submit="processForm()" novalidate>
+      <h2>Create Group</h2>
+      <div class="form-group" ng-class="{'has-error':createForm.name.$invalid}">
+        <label class="control-label" for="name">Name*</label>
+        <div>
+          <input id="name" ng-trim="true" ng-model="formdata.name" name="name" type="text" placeholder="{{'GROUP_NAME_PH_TEXT' | translate}}" class="form-control input-md" ng-required="true"/>
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="control-label" for="emails">Members*</label>
+        <div>
+          <textarea class="form-control" ng-class="{'has-error':createForm.emails.$invalid}" ng-trim="true" placeholder="{{'GROUP_MEMBERS_PH_TEXT' | translate}}" rows="6" ng-model="formdata.emails" id="emails" name="emails" ng-required="true"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <input type="submit" value="{{'BTN_CREATE_TEXT' | translate}}" ng-disabled="!createForm.$valid" class="btn btn-primary btn-block btn-lg" translate="CREATE_SUBMIT_BTN">
+        </div>
+        <div class="col-xs-12 col-md-6"><input type="{{'BTN_RESET_TEXT' | translate}}" value="Reset" class="btn btn-danger btn-block btn-lg" translate="REG_RESET_BTN"></div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -87,6 +87,15 @@ app.config(['$routeProvider', 'localStorageServiceProvider', '$httpProvider', '$
         }
       }
     })
+    .when('/user/:userId/group/list',{
+      templateUrl:'views/user.group.list.html',
+      controller:'UserGroupListCtrl',
+      resolve:{
+        isSameUser: function(policyService, $route){
+          return policyService.isSameUser($route.current.params.userId);
+        }
+      }
+    })
     .when('/user/:userId/synmark/list',{
       templateUrl:'views/user.synmark.list.html',
       controller:'UserSynmarkListCtrl',
@@ -120,6 +129,24 @@ app.config(['$routeProvider', 'localStorageServiceProvider', '$httpProvider', '$
     .when('/browse',{
       templateUrl:'views/browse.html',
       controller:'BrowseCtrl'
+    })
+    .when('/group/:groupId',{
+      templateUrl: 'views/group.html',
+      controller: 'GroupCtrl',
+      resolve:{
+        loginRequired: function(policyService){
+          return policyService.loginRequired();
+        }
+      }
+    })
+    .when('/group.create',{
+      templateUrl: 'views/group.create.html',
+      controller: 'GroupCreateCtrl',
+      resolve:{
+        loginRequired: function(policyService){
+          return policyService.loginRequired();
+        }
+      }
     })
     .when('/playlist.create',{
       templateUrl: 'views/playlist.create.html',
@@ -181,13 +208,19 @@ app.config(['$routeProvider', 'localStorageServiceProvider', '$httpProvider', '$
     NO_PLAYLIST_TEXT:'No playlist',
     FAILED_LOADING_PLAYLIST_TEXT:'Loading playlist error.',
     MY_UPLOADS_TITLE_TEXT:'My uploads',
+    MY_GROUPS_TITLE_TEXT:'My groups',
     PLAYLIST_TITLE_TEXT:'My Playlists',
     PLAYLIST_TITLE_PH_TEXT:'Playlist Title',
     PLAYLIST_TITLE_ERR_TEXT:'Playlist title is missing',
     PLAYLIST_DESCRIPTION_PH_TEXT:'Playlist description',
     PLAYLIST_DESCRIPTION_ERR_TEXT:'Playlist description is missing',
+    GROUP_NAME_PH_TEXT:'Group name',
+    GROUP_NAME_ERR_TEXT:'Group name is missing',
+    GROUP_MEMBERS_PH_TEXT:'Group member emails (separated by comma)',
+    GROUP_MEMBERS_ERR_TEXT:'Group member emails are missing',
     IN_PLAYLIST_TEXT:'In Playlists',
     CREATE_PLAYLIST_SUCCESS_TEXT:'Playlist has been successfully created',
+    CREATE_GROUP_SUCCESS_TEXT:'Group has been successfully created',
     PLAYLIST_NOVIDEO_TEXT:'No multimedia resource in this playlist.',
     MMID_INVALID_TEXT:'Cannot find the multimedia resource.',
     MULTIMEDIA_NOVIDEO_TEXT:'No multimedia resource is found.',
@@ -210,6 +243,7 @@ app.config(['$routeProvider', 'localStorageServiceProvider', '$httpProvider', '$
     PLAYLIST_LOGIN_TEXT:'Please login to see your playlist',
     MY_SYNMARKS_TITLE_TEXT:'My Synmarks',
     MY_SYNMARKS_LINK:'My Bookmarks',
+    MY_GROUPS_LINK:'My Groups',
     SYNMARK_SEARCH_RESULTS_TEXT:'Search results ',
     NO_SYNMARK_FOUND_TEXT:'No synmark is found',
     CREATE_TRANSCRIPT_SUCCESS_TEXT:'Successfully created new transcript',
