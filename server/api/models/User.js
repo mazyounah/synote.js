@@ -33,8 +33,7 @@ module.exports = {
       defaultsTo:"https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=144"
     },
     email:{
-      type: "string",
-      email: true,
+      type: "email",
       required: true,
       unique: true
     },
@@ -79,6 +78,14 @@ module.exports = {
     comments:{
       collection:'comment',
       via:'owner'
+    },
+    ownedGroups: {
+      collection: 'group',
+      via: 'owner'
+    },
+    memberGroups: {
+      collection: 'group',
+      via: 'members'
     }
   }),
   

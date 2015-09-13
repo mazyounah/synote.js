@@ -88,6 +88,13 @@ module.exports.policies = {
 		listJQCloud:['hasJsonWebToken'],
 		listSynmarkTagJQCloud:['hasJsonWebToken']
 	},
+	GroupController:{
+		list:['hasJsonWebToken'],
+		create:['hasJsonWebToken'],
+		addMember:['hasJsonWebToken'],
+		removeMember:['hasJsonWebToken'],
+		delete:['hasJsonWebToken']
+	},
 	SearchController:{
 		do:['requirequeryQuery']
 	}

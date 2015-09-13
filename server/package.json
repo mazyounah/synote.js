@@ -22,7 +22,7 @@
     "grunt-contrib-cssmin": "~0.9.0",
     "grunt-contrib-less": "0.11.1",
     "grunt-contrib-coffee": "~0.10.1",
-    "waterlock":"~0.0.13",
+    "waterlock":"~0.0.14",
     "waterlock-local-auth":"~0.0.5",
     "sails-mysql":"~0.10.7",
     "supertest":"~0.15.0",

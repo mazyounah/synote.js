@@ -68,5 +68,11 @@ module.exports.routes = {
   'get /tag/list':'TagController.list', //list all tags
   'get /tag/list/jqcloud': 'TagController.listJQCloud', //list all tags in jqcloud format
   'get /tag/list/synmark/jqcloud': 'TagController.listSynmarkTagJQCloud',//list only synmark tags in jqcloud format
-  'get /search':'SearchController.do'
+  'get /search':'SearchController.do',
+  'get /group/list':'GroupController.list',
+  'post /group/create':'GroupController.create',
+  'post /group/:group/members/add':'GroupController.addMember',
+  'post /group/:group/members/remove':'GroupController.removeMember',
+  'get /group/:group':'GroupController.get',
+  'delete /group/:group':'GroupController.delete'
 };
