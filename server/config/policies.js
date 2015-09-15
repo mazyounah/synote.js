@@ -88,6 +88,8 @@ module.exports.policies = {
 		listJQCloud:['hasJsonWebToken'],
 		listSynmarkTagJQCloud:['hasJsonWebToken']
 	},
+
+  // Group actions must adhere to the hasJsonWebToken policy
 	GroupController:{
 		list:['hasJsonWebToken'],
 		create:['hasJsonWebToken'],

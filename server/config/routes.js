@@ -69,6 +69,8 @@ module.exports.routes = {
   'get /tag/list/jqcloud': 'TagController.listJQCloud', //list all tags in jqcloud format
   'get /tag/list/synmark/jqcloud': 'TagController.listSynmarkTagJQCloud',//list only synmark tags in jqcloud format
   'get /search':'SearchController.do',
+
+  // All the routes related to group API
   'get /group/list':'GroupController.list',
   'post /group/create':'GroupController.create',
   'post /group/:group/members/add':'GroupController.addMember',

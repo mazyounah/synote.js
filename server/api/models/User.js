@@ -79,10 +79,14 @@ module.exports = {
       collection:'comment',
       via:'owner'
     },
+
+    // This attribute returns all the groups owned by the user
     ownedGroups: {
       collection: 'group',
       via: 'owner'
     },
+
+    // This one returns all the groups that the user was a member of
     memberGroups: {
       collection: 'group',
       via: 'members'
