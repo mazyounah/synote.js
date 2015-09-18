@@ -19,6 +19,9 @@ module.exports = {
       size:'1024',
       required:true
     },
+    permissions: {
+      model: 'permissions'
+    },
     description:{
       type:'text'
     },

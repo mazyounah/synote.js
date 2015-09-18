@@ -90,7 +90,14 @@ module.exports = {
     memberGroups: {
       collection: 'group',
       via: 'members'
+    },
+
+    // This one returns all permission objects associated with the user
+    multimediaPermissions: {
+      collection: 'permissions',
+      via: 'users'
     }
+
   }),
   
   beforeCreate: require('waterlock').models.user.beforeCreate,

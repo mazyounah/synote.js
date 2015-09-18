@@ -54,9 +54,9 @@ module.exports.policies = {
 	  open:true
   	},
 	MultimediaController:{
-		metadata:['hasJsonWebToken','requireurlQuery'],
+		metadata:['hasJsonWebToken','requireurlQuery', 'validatePermissions'],
 		create:['hasJsonWebToken','requiretitleBody'],
-		get:['optJsonWebToken','requiremmidParams'],
+		get:['optJsonWebToken','requiremmidParams', 'validatePermissions'],
 		save:['hasJsonWebToken','requiremmidParams','isMultimediaOwner'],
 		listByOwner:['hasJsonWebToken']
 	},
@@ -97,6 +97,16 @@ module.exports.policies = {
 		removeMember:['hasJsonWebToken'],
 		delete:['hasJsonWebToken']
 	},
+
+  // Permission related actions should adhere to the
+  // hasJsonWebToken policy as well
+	PermissionsController:{
+		get:['hasJsonWebToken'],
+		set:['hasJsonWebToken'],
+		addUser:['hasJsonWebToken'],
+		addGroup:['hasJsonWebToken']
+	},
+
 	SearchController:{
 		do:['requirequeryQuery']
 	}

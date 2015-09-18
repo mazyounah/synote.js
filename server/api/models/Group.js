@@ -18,6 +18,12 @@ module.exports = {
     members: {
       collection: 'user',
       via: 'memberGroups'
+    },
+
+    // Permissions that the group has
+    multimediaPermissions: {
+      collection: 'permissions',
+      via: 'groups'
     }
   }
 };

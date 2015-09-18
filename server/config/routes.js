@@ -76,5 +76,11 @@ module.exports.routes = {
   'post /group/:group/members/add':'GroupController.addMember',
   'post /group/:group/members/remove':'GroupController.removeMember',
   'get /group/:group':'GroupController.get',
-  'delete /group/:group':'GroupController.delete'
+  'delete /group/:group':'GroupController.delete',
+
+  // Routes related to permissions
+  'get /multimedia/:multimedia/permissions': 'Permissions.get',
+  'post /multimedia/:multimedia/permissions': 'Permissions.set',
+  'post /multimedia/:multimedia/permissions/add-user': 'Permissions.addUser',
+  'post /multimedia/:multimedia/permissions/add-group': 'Permissions.addGroup',
 };
