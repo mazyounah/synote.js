@@ -336,3 +336,16 @@ videogular .cuepoints .cuepoint {
   background-color: red;
 }
 
+.permbox {
+  padding: 10px;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 1em;
+}
+
+select.permbox {
+  width: 200px;
+}
+
+input.permbox {
+  width: 100%;
+}

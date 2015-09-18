@@ -745,7 +745,8 @@ angular.module('synoteClient')
           tagsinput.tagsinput();
         },2000);
 
-        $scope.loadPromise = multimediaService.getMultimedia(mmid, pliid)
+        var otp = $location.search().otp;
+        $scope.loadPromise = multimediaService.getMultimedia(mmid, pliid, otp)
           .then(function (data) {
             //console.log(data);
             $scope.multimedia = data.multimedia;

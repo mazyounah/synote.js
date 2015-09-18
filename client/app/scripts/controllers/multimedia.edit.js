@@ -45,6 +45,9 @@ angular.module('synoteClient')
         messageCenterService.add('danger',$translate('MMID_INVALID_TEXT'),{timeout:5000});
       });
 
+      $scope.editPermissions = function() {
+        $location.path('/multimedia.permissions/' + $routeParams.mmid);
+      };
 
       $scope.processForm = function(){
         console.log("processForm");

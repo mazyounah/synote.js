@@ -126,6 +126,15 @@ app.config(['$routeProvider', 'localStorageServiceProvider', '$httpProvider', '$
         }
       }
     })
+    .when('/multimedia.permissions/:mmid', {
+      templateUrl: 'views/multimedia.permissions.html',
+      controller: 'MultimediaPermissionsCtrl',
+      resolve:{
+        loginRequired: function(policyService){
+          return policyService.loginRequired();
+        }
+      }
+    })
     .when('/browse',{
       templateUrl:'views/browse.html',
       controller:'BrowseCtrl'

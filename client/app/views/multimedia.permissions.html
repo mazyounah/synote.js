@@ -1,0 +1,46 @@
+<div mc-messages></div>
+<div class="row">
+  <div ng-include="'views/templates/sidebar.html'"></div>
+  <div class="col-sm-8 col-md-9">
+    <h2>Edit Multimedia Permissions</h2>
+    <div class="col-sm-8 col-md-9" cg-busy="permissionsPromise">
+      <div class="row">
+        <select name="type" class="permbox" ng-model="permissions.type" ng-change="permissionsChange()">
+          <option value="private">Private</option>
+          <option value="public">Public</option>
+          <option value="link">Link</option>
+        </select>
+
+        <div class="row" ng-if="permissions.type === 'public'">
+          <h5>Accessible by anyone</h5> 
+        </div>
+
+        <div class="row" ng-if="permissions.type === 'link'">
+          <h5>Allow access through this link</h5> 
+          <input class="permbox" readonly="readonly" value="{{ otl }}" />
+        </div>
+
+        <div ng-if="permissions.type === 'private'" class="row">
+          <h5>Allow access to users</h5> 
+          <div class="row" ng-repeat="user in permissions.users">  
+            <div class="col-sm-12 col-md-12">
+              <span class="group-member">{{ user.email }}</span>
+            </div>
+          </div>
+          <input type="text" name="email" ng-trim="true" class="form-control input-sm" placeholder="Enter email" />
+          <button ng-click="addUser()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Add User</button>
+        </div>
+
+        <div ng-if="permissions.type === 'private'" class="row" cg-busy="userGroupsPromise">
+          <h5>Allow access to your groups</h5> 
+          <div class="row" ng-repeat="group in groups">  
+            <div class="col-sm-12 col-md-12">
+              <input type="checkbox" ng-model="group.hasp" ng-change="groupChecked(group.id)" />
+              <span class="group-member">{{ group.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

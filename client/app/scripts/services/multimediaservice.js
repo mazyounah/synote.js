@@ -29,17 +29,101 @@ angular.module('synoteClient')
       return deferred.promise;
     }
 
-    function getMultimedia(mmid, pliid){
+    function allowGroup(mmid, group){
+      var deferred = $q.defer();
+
+      var accessToken = authenticationService.isLoggedIn()?authenticationService.getUserInfo().accessToken:undefined;
+      var accessTokenStr = accessToken?("access_token="+accessToken):"";
+
+
+      $http.post(ENV.apiEndpoint + "/multimedia/"+mmid+"/permissions/add-group?"+accessTokenStr, { group: group })
+        .then(function (result) {
+          if(result.status === 200)
+            deferred.resolve(result.data.permissions);
+          else
+            deferred.reject({success:false,message:result.statusText});
+        }, function (error) {
+          deferred.reject(error);
+        });
+
+      return deferred.promise;
+    }
+
+    function allowUser(mmid, email){
+      var deferred = $q.defer();
+
+      var accessToken = authenticationService.isLoggedIn()?authenticationService.getUserInfo().accessToken:undefined;
+      var accessTokenStr = accessToken?("access_token="+accessToken):"";
+
+
+      $http.post(ENV.apiEndpoint + "/multimedia/"+mmid+"/permissions/add-user?"+accessTokenStr, { email: email })
+        .then(function (result) {
+          if(result.status === 200)
+            deferred.resolve(result.data.permissions);
+          else
+            deferred.reject({success:false,message:result.statusText});
+        }, function (error) {
+          deferred.reject(error);
+        });
+
+      return deferred.promise;
+    }
+
+
+    function setPermissions(mmid, type){
+      var deferred = $q.defer();
+
+      var accessToken = authenticationService.isLoggedIn()?authenticationService.getUserInfo().accessToken:undefined;
+      var accessTokenStr = accessToken?("access_token="+accessToken):"";
+
+
+      $http.post(ENV.apiEndpoint + "/multimedia/"+mmid+"/permissions?"+accessTokenStr, { type: type })
+        .then(function (result) {
+          if(result.status === 200)
+            deferred.resolve(result.data.permissions);
+          else
+            deferred.reject({success:false,message:result.statusText});
+        }, function (error) {
+          deferred.reject(error);
+        });
+
+      return deferred.promise;
+    }
+
+    function getPermissions(mmid){
+      var deferred = $q.defer();
+
+      var accessToken = authenticationService.isLoggedIn()?authenticationService.getUserInfo().accessToken:undefined;
+      var accessTokenStr = accessToken?("access_token="+accessToken):"";
+
+
+      $http.get(ENV.apiEndpoint + "/multimedia/"+mmid+"/permissions?"+accessTokenStr)
+        .then(function (result) {
+          if(result.status === 200)
+            deferred.resolve(result.data.permissions);
+          else
+            deferred.reject({success:false,message:result.statusText});
+        }, function (error) {
+          deferred.reject(error);
+        });
+
+      return deferred.promise;
+    }
+
+    function getMultimedia(mmid, pliid, otp){
       var deferred = $q.defer();
 
       var accessToken = authenticationService.isLoggedIn()?authenticationService.getUserInfo().accessToken:undefined;
       var accessTokenStr = accessToken?("access_token="+accessToken):"";
       var pliidStr = pliid?("pliid="+pliid):"";
+      var otpStr = otp ? ("otp=" + otp) : '';
       if(accessToken && pliid)
         pliidStr = "&"+pliidStr
 
+      if(accessToken && otp || pliid && otp)
+        otpStr = "&" + otpStr
 
-      $http.get(ENV.apiEndpoint + "/multimedia/get/"+mmid+"?"+accessTokenStr+pliidStr)
+      $http.get(ENV.apiEndpoint + "/multimedia/get/"+mmid+"?"+accessTokenStr+pliidStr+otpStr)
         .then(function (result) {
           if(result.status === 200)
             deferred.resolve(result.data);
@@ -224,6 +308,10 @@ angular.module('synoteClient')
     return {
       getMetadata: getMetadata,
       getMultimedia: getMultimedia,
+      getPermissions: getPermissions,
+      setPermissions: setPermissions,
+      allowUser: allowUser,
+      allowGroup: allowGroup,
       createMultimedia:createMultimedia,
       saveMultimedia:saveMultimedia,
       listMultimedia:listMultimedia,
